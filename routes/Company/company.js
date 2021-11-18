@@ -1,5 +1,5 @@
 // our-first-route.js
-const DataBase = require("../../DB_Sequelize/Sequelize/index.js"),
+const DataBase = require("../../DB_Sequelize/models"),
   { uploadCompanyImages } = require("../../Config/Multer/imageUpload"),
   router = require("express").Router();
 
@@ -190,3 +190,5 @@ router.post("/uploadCompanyImage", async (request, reply) => {
   });
   return reply;
 });
+
+module.exports = router;

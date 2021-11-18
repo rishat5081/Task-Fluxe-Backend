@@ -34,11 +34,6 @@ app.use("/supplier", supplierRouter);
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
 app.get("/", async (req, res) => {
   res.send(
     `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
@@ -50,6 +45,12 @@ app.get("*", (req, res) => {
     `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
   );
 });
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
 // error handler
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development

@@ -41,10 +41,17 @@ router.get("/getNames", async (request, reply) => {
       deleted: false,
     },
   });
-  reply.status(200).send({
-    companies,
-  });
-  reply.end();
+  if (companies) {
+    reply.status(200).send({
+      companies,
+    });
+    reply.end();
+  } else {
+    reply.status(400).send({
+      status: "Invalid Request",
+    });
+    reply.end();
+  }
 });
 
 //here we are getting the information of the company and supplier for the supplier management drawer

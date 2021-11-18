@@ -39,6 +39,11 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+app.route("/").get(async (req, res) => {
+  res.send(
+    `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
+  );
+});
 // error handler
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development

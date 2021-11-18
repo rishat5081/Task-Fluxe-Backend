@@ -8,12 +8,19 @@ const Database = require("./DB_Sequelize/models");
 var companyRouter = require("./routes/Company/company");
 // var invoiceRouter = require("./routes/Invoice/invoice");
 // var producLaunchRouter = require("./routes/Product Launch/productLaunch");
-// var supplierRouter = require("./routes/Supplier/supplier");
+var supplierRouter = require("./routes/Supplier/supplier");
 // var supplierComparisonRouter = require("./routes/Supplier Comparison/supplierComparison");
-// var webControllerRouter = require("./routes/Web Controllers/webControllers");
+var webControllerRouter = require("./routes/Web Controllers/webControllers");
 // var usersRouter = require("./routes/users");
 
 var app = express();
+
+// fastify.register(companyRoute, { prefix: "/company" });
+// fastify.register(supplierRoute, { prefix: "/supplier" });
+// fastify.register(invoiceRoute, { prefix: "/invoice" });
+// fastify.register(supplierComparisonRoute, { prefix: "/supplierComparison" });
+// fastify.register(productLaunchRoute, { prefix: "/productLaunch" });
+// fastify.register(webControllers, { prefix: "/controller" });
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -22,6 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/company", companyRouter);
+app.use("/controller", webControllerRouter);
+app.use("/supplier", supplierRouter);
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 

@@ -39,7 +39,13 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-app.route("/").get(async (req, res) => {
+app.get("/", async (req, res) => {
+  res.send(
+    `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
+  );
+});
+
+app.get("*", (req, res) => {
   res.send(
     `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
   );

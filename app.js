@@ -3,15 +3,15 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const Database = require("./DB_Sequelize/models");
+const Database = require("./DB_Sequelize/models"),
+  cors = require("cors");
 
 var companyRouter = require("./routes/Company/company");
-// var invoiceRouter = require("./routes/Invoice/invoice");
-// var producLaunchRouter = require("./routes/Product Launch/productLaunch");
+var invoiceRouter = require("./routes/Invoice/invoice");
+var producLaunchRouter = require("./routes/Product Launch/productLaunch");
 var supplierRouter = require("./routes/Supplier/supplier");
-// var supplierComparisonRouter = require("./routes/Supplier Comparison/supplierComparison");
+var supplierComparisonRouter = require("./routes/Supplier Comparison/supplierComparison");
 var webControllerRouter = require("./routes/Web Controllers/webControllers");
-// var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -27,12 +27,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("*", cors());
 
 app.use("/company", companyRouter);
 app.use("/controller", webControllerRouter);
 app.use("/supplier", supplierRouter);
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
+app.use("/invoice", invoiceRouter);
+app.use("/productLaunch", producLaunchRouter);
+app.use("/supplierComparison", supplierComparisonRouter);
 
 app.get("/", async (req, res) => {
   res.send(
@@ -61,7 +63,5 @@ app.use(function (req, res, next) {
 //   res.status(err.status || 500);
 //   res.render("error");
 // });
-
-console.log("Works");
 
 module.exports = app;

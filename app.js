@@ -15,13 +15,6 @@ var webControllerRouter = require("./routes/Web Controllers/webControllers");
 
 var app = express();
 
-// fastify.register(companyRoute, { prefix: "/company" });
-// fastify.register(supplierRoute, { prefix: "/supplier" });
-// fastify.register(invoiceRoute, { prefix: "/invoice" });
-// fastify.register(supplierComparisonRoute, { prefix: "/supplierComparison" });
-// fastify.register(productLaunchRoute, { prefix: "/productLaunch" });
-// fastify.register(webControllers, { prefix: "/controller" });
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,6 +40,19 @@ app.get("*", (req, res) => {
     `<div style="display:flex;text-align:center; margin:auto"> <h1>Task Fluxe </h1> </div>`
   );
 });
+/**
+ * Syncing the database
+ */
+// Database.sequelize.query("SET FOREIGN_KEY_CHECKS=1;");
+// Database.sequelize
+//   .sync({ force: true })
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// Database.sequelize.query("SET FOREIGN_KEY_CHECKS=0;");
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

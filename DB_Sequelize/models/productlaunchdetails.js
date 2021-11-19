@@ -17,13 +17,13 @@ module.exports = (sequelize, { DataTypes, Model }) => {
         foreignKey: "productLaunchListsID",
       });
 
-      models.User.hasMany(ProductLaunchDetails, {
-        foreignKey: "userID",
-      });
-      ProductLaunchDetails.belongsTo(models.User, {
-        targetKey: "userID",
-        foreignKey: "userID",
-      });
+      // models.User.hasMany(ProductLaunchDetails, {
+      //   foreignKey: "userID",
+      // });
+      // ProductLaunchDetails.belongsTo(models.User, {
+      //   targetKey: "userID",
+      //   foreignKey: "userID",
+      // });
       //project launch can only have one status
       models.ProductLaunchDetailsStatus.hasOne(ProductLaunchDetails, {
         foreignKey: "productLaunchDetailsStatusID",
@@ -130,16 +130,16 @@ module.exports = (sequelize, { DataTypes, Model }) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       },
-      userID: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-          model: "User",
-          key: "userID",
-        },
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      },
+      // userID: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: true,
+      //   references: {
+      //     model: "User",
+      //     key: "userID",
+      //   },
+      //   onDelete: "CASCADE",
+      //   onUpdate: "CASCADE",
+      // },
 
       paused: {
         type: DataTypes.BOOLEAN,

@@ -86,6 +86,7 @@ module.exports = (sequelize, { DataTypes, Model }) => {
     },
     {
       sequelize,
+      freezeTableName: true,
       //tableName "company",
       modelName: "company",
     }

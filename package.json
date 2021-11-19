@@ -1,5 +1,5 @@
 {
-  "name": "tset",
+  "name": "express_api_server",
   "version": "0.0.0",
   "private": true,
   "scripts": {

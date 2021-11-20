@@ -34,13 +34,21 @@ router.get("/getDashboard", async (request, reply) => {
 
 //getting the names of the registered companies for adding a new supplier
 router.get("/getNames", async (request, reply) => {
-  let companies = await DataBase.company.findAll({
-    attributes: ["companyUUID", "companyName"],
-    where: {
-      paused: false,
-      deleted: false,
-    },
-  });
+  let companies = await DataBase.company
+    .findAll({
+      attributes: ["companyUUID", "companyName"],
+      where: {
+        paused: false,
+        deleted: false,
+      },
+    })
+    .then((result) => {
+      if (result) return result;
+      else return null;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   if (companies) {
     reply.status(200).send({
       companies,

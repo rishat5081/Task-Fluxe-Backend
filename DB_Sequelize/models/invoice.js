@@ -74,11 +74,11 @@ module.exports = (sequelize, { DataTypes, Model }) => {
       },
       invoiceFileTitle: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       invoiceFile: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       invoiceNotes: {
         type: DataTypes.TEXT,

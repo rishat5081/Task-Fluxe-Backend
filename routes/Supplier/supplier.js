@@ -402,6 +402,54 @@ router.post("/uploadSupplierFiles", async (request, reply) => {
   });
 });
 
+//PUT
+//deleting the attachment of the supplier
+router.route("/deleteAttachment").put(async (request, reply) => {
+  let supplierFile = await DataBase.SupplierFiles.update(
+    {
+      deleted: true,
+    },
+    {
+      where: {
+        fileUUID: request.body.fileUUID,
+        paused: false,
+        deleted: false,
+      },
+    }
+  )
+    .then((response) => {
+      if (response) {
+        return response;
+      } else {
+        return null;
+      }
+    })
+    .catch((err) => {
+      if (err) {
+        return null;
+      }
+    });
+
+  if (supplierFile) {
+    reply.status(200).send({
+      status: "success",
+      supplierFile,
+      message: "Attachment Deleted Successfully",
+    });
+    reply.end();
+    return;
+  } else {
+    console.log("Error Fetching Products to Suuplier");
+    console.trace("Error Fetching Products to Suuplier");
+    reply.status(200).send({
+      status: "error",
+      supplierFile,
+      message: "Error, Please try Again",
+    });
+    reply.end();
+    return;
+  }
+});
 // ------------------------------------ End of Supplier Management Page ------------------------------------------------
 /**
  *

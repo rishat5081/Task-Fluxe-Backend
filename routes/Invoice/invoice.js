@@ -576,7 +576,10 @@ router.route("/updateInvoiceAttachment").put(async (request, reply) => {
         },
       });
 
-      await unlink(`../taskFluxe/public${invoiceFile.dataValues.invoiceFile}`);
+      if (invoiceFile.dataValues.invoiceFileTitle)
+        await unlink(
+          `../taskFluxe/public${invoiceFile.dataValues.invoiceFile}`
+        );
       var filePath = request.files[0].destination.split("/public")[1];
 
       DataBase.Invoice.update(
@@ -614,5 +617,49 @@ router.route("/updateInvoiceAttachment").put(async (request, reply) => {
         });
     }
   });
+});
+
+//PUT
+//deleting the invoice file
+router.route("/deleteInvoiceAttachment").put(async (request, reply) => {
+  if (request.body) {
+    let invoiceUpdate = await DataBase.Invoice.update(
+      {
+        invoiceFileTitle: null,
+        invoiceFile: null,
+      },
+      {
+        where: {
+          paused: false,
+          deleted: false,
+          invoiceUUID: request.body.invoiceUUID,
+        },
+      }
+    ).catch((err) => {
+      if (err) {
+        console.error("Error Updating Invoice details");
+        console.trace(err);
+        return null;
+      }
+    });
+
+    if (invoiceUpdate) {
+      reply.status(200).send({
+        status: "success",
+        message: "Successfully Deleted",
+        invoiceUpdate,
+      });
+      reply.end();
+      return;
+    } else {
+      reply.status(500).send({
+        status: "error",
+        message: "Error Please try Again",
+        invoiceUpdate,
+      });
+      reply.end();
+      return;
+    }
+  }
 });
 module.exports = router;

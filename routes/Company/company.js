@@ -96,7 +96,7 @@ router.route("/getCompany_SupplierInformation").get(async (request, reply) => {
             },
             {
               model: DataBase.SupplierFiles,
-              attributes: ["fileTitle", "filePath"],
+              attributes: ["fileTitle", "fileUUID", "filePath"],
               //required false make the left outer join
               required: false,
               where: {

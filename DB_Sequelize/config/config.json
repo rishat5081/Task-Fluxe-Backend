@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
-    "database": "teamfluxe_db",
-    "host": "127.0.0.1",
+    "username": "taskfluxeuser",
+    "password": "saad@1234",
+    "database": "taskfluxedb",
+    "host": "db4free.net",
     "port": 3306,
     "dialect": "mysql",
     "freezeTableName": true,
